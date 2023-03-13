@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 
 // Import the ProductCard component to display each product in the cart
 import ProductCard from '../modules/cards/ProductCard';
-import Barcode from '../modules/scanner/Barcode';
+import Barcode from '../modules/inputs/Barcode';
+import AddProduct from '../modules/inputs/AddProduct';
 
 export default function CartScreen() {
     const navigation = useNavigation();
@@ -26,8 +27,8 @@ export default function CartScreen() {
     const [products, setProducts] = useState([]);
 
     // Function to add a new product to the cart
-    const handleAddProduct = (product) => {
-        setProducts([...products, product]);
+    const handleAddProduct = (newProduct) => {
+        setProducts([...products, newProduct]);
     };
 
     // Function to remove a product from the cart
