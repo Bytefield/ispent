@@ -8,7 +8,7 @@ import AdminScreen      from './screens/AdminScreen';
 import ItemsScreen      from './screens/ItemsScreen';
 import ProfileScreen    from './screens/ProfileScreen';
 import LoginScreen      from './screens/LoginScreen';
-import CartScreen      from './screens/CartScreen';
+import Main             from './screens/compra/Main';
 
 // Modules
 import LoginButton      from './modules/buttons/Login';
@@ -28,11 +28,11 @@ export default function App() {
                         ),
                     })}
                 />
-                <Stack.Screen name="Admin"      component={AdminScreen} />
-                <Stack.Screen name="Items"      component={ItemsScreen} />
-                <Stack.Screen name="Profile"    component={ProfileScreen} />
-                <Stack.Screen name="Login"      component={LoginScreen} />
-                <Stack.Screen name="Cart"      component={CartScreen} />
+                <Stack.Screen name="Admin" component={AdminScreen} />
+                <Stack.Screen name="Items" component={ItemsScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Compra_Main" component={Main} />
             </Stack.Navigator>
         </NavigationContainer>
     );

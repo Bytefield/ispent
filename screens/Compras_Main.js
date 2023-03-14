@@ -7,7 +7,7 @@ import ProductCard from '../modules/cards/ProductCard';
 import Barcode from '../modules/inputs/Barcode';
 import AddProduct from '../modules/inputs/AddProduct';
 
-export default function CartScreen() {
+export default function Compra_Main() {
     const navigation = useNavigation();
 
     // Add product state > toggle manual input.
@@ -61,19 +61,19 @@ export default function CartScreen() {
                 <Button title="Add Product"
                         onPress={() => setShowAddProduct(true)}
                 />
-                {showAddProduct && (
-                    <AddProduct
-                        addProductToList={(name, quantity, price) => {
-                            setProductList([...productList, { name, quantity, price }]);
-                            setShowAddProduct(false);
-                        }}
-                    />
-                )}
                 <Button
                     title={showScanner ? 'Cancel' : 'Scan Barcode'}
                     onPress={() => setShowScanner(!showScanner)}
                 />
             </View>
+            {showAddProduct && (
+                <AddProduct
+                    addProductToList={(name, quantity, price) => {
+                        setProductList([...productList, { name, quantity, price }]);
+                        setShowAddProduct(false);
+                    }}
+                />
+            )}
             {showScanner && (
                 <Barcode onBarCodeScanned={handleScan} style={{ flex: 1 }} />
             )}

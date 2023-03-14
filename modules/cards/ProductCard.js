@@ -1,83 +1,73 @@
 import React from 'react';
-import { View, Text, Image, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
-const ProductCard = ({ product, onChangeQuantity, onChangePrice, onRemove }) => {
+export default function ProductCard ({product:{display_name, qty, price}}, onRemove)  {
+
+  // const { product:{ display_name, qty, price } } = item;
+  const totalPrice = qty * price;
+
+  const openDetail = () => console.log('open detail');
+  const handleRemove = () => console.log('remove item');
+
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: product.thumbnails }} />
+    <TouchableOpacity onPress={openDetail}>
+      <View style={styles.card}>
+        <Text style={styles.title}>{display_name}</Text>
+        <Text style={styles.qty}>Cantidad: {qty || 0}</Text>
+        <Text style={styles.price}>Precio: {price || 0}</Text>
+        <Text style={styles.totalPrice}>Total: {totalPrice}</Text>
+        <TouchableOpacity onPress={handleRemove} style={styles.button} hitSlop={styles.hitSlop}>
+          <Text style={styles.buttonText}>Borrar</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.name}>{product.display_name}</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Quantity"
-          keyboardType="numeric"
-          value={product.quantity.toString()}
-          onChangeText={(value) => onChangeQuantity(product._id, value)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Price"
-          keyboardType="numeric"
-          value={product.price.toString()}
-          onChangeText={(value) => onChangePrice(product._id, value)}
-        />
-        <Text style={styles.price}>Total: {(product.quantity * product.price).toFixed(2)}</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Remove" onPress={() => onRemove(product._id)} />
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  card: {
     backgroundColor: '#fff',
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-    elevation: 5,
+    borderRadius: 8,
+    padding: 16,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
   },
-  imageContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  infoContainer: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  name: {
-    fontSize: 16,
+  title: {
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginBottom: 5,
+  qty: {
+    fontSize: 16,
+    marginTop: 8,
   },
   price: {
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'right',
+    marginTop: 8,
   },
-  buttonContainer: {
-    marginLeft: 10,
+  totalPrice: {
+    fontSize: 16,
+    marginTop: 8,
+  },
+  button: {
+    backgroundColor: '#f44336',
+    borderRadius: 4,
+    padding: 8,
+    marginTop: 16,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  hitSlop: {
+    top: -15,
+    right: -15,
+    bottom: -15,
+    left: -15,
   },
 });
-
-export default ProductCard;
