@@ -3,3 +3,6 @@
 **/data
 **/venv
 **/certs
+*.dtmp
+/.expo
+/.expo-shared

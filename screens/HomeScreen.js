@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
             <Text>Welcome to My App</Text>
             <Button
                 title="Nueva compra"
-                onPress={() => navigation.navigate('Compra_Main')}
+                onPress={() => navigation.navigate('Main')}
             />
             <Button
                 title="Go to Profile"

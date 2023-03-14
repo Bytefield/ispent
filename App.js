@@ -9,6 +9,7 @@ import ItemsScreen      from './screens/ItemsScreen';
 import ProfileScreen    from './screens/ProfileScreen';
 import LoginScreen      from './screens/LoginScreen';
 import Main             from './screens/compra/Main';
+import ProductoDetalle  from './screens/compra/ProductoDetalle'
 
 // Modules
 import LoginButton      from './modules/buttons/Login';
@@ -32,7 +33,8 @@ export default function App() {
                 <Stack.Screen name="Items" component={ItemsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Compra_Main" component={Main} />
+                <Stack.Screen name="Main" component={Main} />
+                <Stack.Screen name="ProductoDetalle" component={ProductoDetalle} />
             </Stack.Navigator>
         </NavigationContainer>
     );

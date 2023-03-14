@@ -1,20 +1,23 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ProductCard ({product:{display_name, qty, price}}, onRemove)  {
+export default function ProductCard (item, onRemove)  {
 
-  // const { product:{ display_name, qty, price } } = item;
+  const navigation = useNavigation();
+
+  const {display_name, qty, price} = item.product;
   const totalPrice = qty * price;
 
   const openDetail = () => console.log('open detail');
   const handleRemove = () => console.log('remove item');
 
   return (
-    <TouchableOpacity onPress={openDetail}>
+    <TouchableOpacity onPress={navigation.navigate('ProductoDetalle', {data: item.product})}>
       <View style={styles.card}>
         <Text style={styles.title}>{display_name}</Text>
-        <Text style={styles.qty}>Cantidad: {qty || 0}</Text>
-        <Text style={styles.price}>Precio: {price || 0}</Text>
+        <Text style={styles.qty}>Cantidad: {qty}</Text>
+        <Text style={styles.price}>Precio: {price}</Text>
         <Text style={styles.totalPrice}>Total: {totalPrice}</Text>
         <TouchableOpacity onPress={handleRemove} style={styles.button} hitSlop={styles.hitSlop}>
           <Text style={styles.buttonText}>Borrar</Text>

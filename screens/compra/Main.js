@@ -4,29 +4,22 @@ import { useNavigation } from '@react-navigation/native';
 
 // Import the ProductCard component to display each product in the cart
 import ProductCard from '../../modules/cards/ProductCard';
-import Barcode from '../../modules/inputs/Barcode';
-import AddProduct from '../../modules/inputs/AddProduct';
 
 export default function Main() {
     const navigation = useNavigation();
 
-    // Add product state > toggle manual input.
-    const [showAddProduct, setShowAddProduct] = useState(false);
-
-    // Add product by bar code > toggle scanner
-    const [showScanner, setShowScanner] = useState(false);
-    const [scannedProduct, setScannedProduct] = useState(null);
-
-    const handleScan = ({ type, data }) => {
-        // do something with the scanned data
-        setScannedProduct(data);
-        setShowScanner(false);
-    };
-
     let productsHardCoded = [
         {
+            "relative_id": {
+                "mercadona": ""
+            },
+            "allergens": "",
+            "brand": "",
+            "description": "",
             "display_name":"Medio pollo certificado troceado alimentado con un 50% de ma\u00edz",
             "ean":"8480000100009",
+            "ingredients": "",
+            "thumbnail": "url",
             "qty": 2,
             "price": 25
         },
@@ -40,7 +33,7 @@ export default function Main() {
 
     // State to keep track of the scanned or manually added products in the cart
     // const [products, setProducts] = useState([]);
-    const [products, setProducts] = useState(productsHardCoded);
+    const [products, setProducts] = useState([]);
 
     // Function to add a new product to the cart
     const handleAddProduct = (newProduct) => {
@@ -62,7 +55,7 @@ export default function Main() {
     };
 
     // Render each product in the cart as a ProductCard component
-    const renderItem = ({ item }) => (
+    const renderProduct = ({ item }) => (
         <ProductCard
             product={item}
             index={item.ean}
@@ -75,13 +68,13 @@ export default function Main() {
         <View style={styles.container}>
             <FlatList
                 data={products}
-                renderItem={renderItem}
-                ListEmptyComponent={<Text>No items yet</Text>}
-                keyExtractor={(item) => item.ean}
+                renderItem={renderProduct}
+                ListEmptyComponent={<Text>Nada agregado todavia</Text>}
+                keyExtractor={(product) => product.ean}
                 contentContainerStyle={styles.productsContainer}
             />
             <Button title="Add Product"
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('ProductoDetalle')}
             />
         </View>
     );
