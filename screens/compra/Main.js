@@ -74,7 +74,7 @@ export default function Main() {
                 contentContainerStyle={styles.productsContainer}
             />
             <Button title="Add Product"
-                    onPress={() => navigation.navigate('ProductoDetalle')}
+                    onPress={() => navigation.navigate('Scan')}
             />
         </View>
     );
