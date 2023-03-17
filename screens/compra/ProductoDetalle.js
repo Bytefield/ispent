@@ -1,11 +1,60 @@
 // screens/ProductDetailScreen.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import axios from 'axios';
 
 const ProductDetailScreen = ({ route, navigation }) => {
+
+    const dataDB = [
+        {
+            relative_id: {
+                "mercadona": "",
+                "carrefour": "",
+            },
+            allergens: "null",
+            brand: "null",
+            description: "",
+            display_name: "Galletas de avena con chocolate Negro",
+            ean:"8410376064490",
+            ingredients: "galleta, chocolate",
+            thumbnails: ""
+        },
+        {
+            relative_id: {
+                "mercadona": "",
+                "carrefour": "",
+            },
+            allergens: "null",
+            brand: "null",
+            description: "",
+            display_name: "Galletas de avena con chocolate Negro",
+            ean:"8410376064490",
+            ingredients: "galleta, chocolate",
+            thumbnails: ""
+        }
+    ]
+
     const { barcode } = route.params;
+    const [productScanned, setProductScanned] = useState({})
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
+
+    useEffect(() => {
+        const fetchData = async (barcode) => {
+            try {
+                // const response = await axios.get(`https://localhost:5000/product/${barcode}`);
+                const response = await dataDB.find(item => item.ean === barcode)
+                setProduct(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.log(error);
+            } else {
+                console.log('no encontro producto')
+            }
+        }
+
+        fetchData();
+    }, [barcode]);
 
     const handleSave = () => {
         // Save the product data and add it to the products list

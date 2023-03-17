@@ -25,6 +25,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "hostUri": "https://localhost:3000"
     }
   }
 }
