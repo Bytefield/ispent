@@ -48,8 +48,6 @@ const ProductDetailScreen = ({ route, navigation }) => {
                 console.log(response.data);
             } catch (error) {
                 console.log(error);
-            } else {
-                console.log('no encontro producto')
             }
         }
 
