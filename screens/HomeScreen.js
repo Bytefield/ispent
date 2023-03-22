@@ -6,6 +6,10 @@ export default function HomeScreen({ navigation }) {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Welcome to My App</Text>
             <Button
+                title="Cuentas"
+                onPress={() => navigation.navigate('Cuentas_Main')}
+            />
+            <Button
                 title="Nueva compra"
                 onPress={() => navigation.navigate('Main')}
             />
