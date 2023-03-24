@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, Text, FlatList, Button, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { onSaveItem } from '../../helpers/helpers';
 
@@ -25,13 +25,15 @@ const Cuentas_Main = ({ navigation }) => {
     };
 
     const renderItem = ({ item }) => (
-        <View style={{ padding: 10 }}>
-            <Text style={{ fontWeight: 'bold' }}>{item.nombre}</Text>
-            <Text>ID: {item.id}</Text>
-            <Text>Fecha de inicio: {item.fechaInicio}</Text>
-            <Text>Fecha de fin: {item.fechaFin}</Text>
-            <Text>Cerrado: {item.cerrado.toString()}</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('Cuentas_Items', { itemId: item.id })}>
+            <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>{item.nombre}</Text>
+                <Text>ID: {item.id}</Text>
+                <Text>Fecha de inicio: {item.fechaInicio}</Text>
+                <Text>Fecha de fin: {item.fechaFin}</Text>
+                <Text>Cerrado: {item.cerrado.toString()}</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return (
