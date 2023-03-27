@@ -13,7 +13,8 @@ import ProductoDetalle      from './screens/compra/ProductoDetalle';
 import Scan                 from './screens/compra/Scan';
 import Cuentas_Main         from './screens/cuentas/Cuentas_Main';
 import Cuentas_Add_Item     from './screens/cuentas/Cuentas_Add_Item';
-import Cuentas_Items        from './screens/cuentas/Cuentas_Items';
+import Cuentas_Eventos        from './screens/cuentas/Cuentas_Eventos';
+import Cuentas_Add_Evento        from './screens/cuentas/Cuentas_Add_Evento';
 
 // Modules
 import LoginButton      from './modules/buttons/Login';
@@ -35,7 +36,8 @@ export default function App() {
                 />
                 <Stack.Screen name="Cuentas_Main" component={Cuentas_Main} />
                 <Stack.Screen name="Cuentas_Add_Item" component={Cuentas_Add_Item} />
-                <Stack.Screen name="Cuentas_Items" component={Cuentas_Items} />
+                <Stack.Screen name="Cuentas_Eventos" component={Cuentas_Eventos} />
+                <Stack.Screen name="Cuentas_Add_Evento" component={Cuentas_Add_Evento} />
                 <Stack.Screen name="Admin" component={AdminScreen} />
                 <Stack.Screen name="Items" component={ItemsScreen} />
                 <Stack.Screen name="Profile" component={ProfileScreen} />

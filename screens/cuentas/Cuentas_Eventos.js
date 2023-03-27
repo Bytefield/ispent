@@ -3,31 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native-gesture-handler';
 import { TouchableOpacity } from 'react-native-web';
+import { onSaveEvento } from '../../helpers/helpers';
 
-function MyScreen({ route }) {
+function Cuentas_Eventos({ navigation, route }) {
 
-    const [cuentas, setCuentas] = useState([]);
+    const [ eventos, setEventos ] = useState([]);
+    const { itemId } = route.params;
 
-    // console.log(route.params)
-
-    const fetchObject = async () => {
-        try {
-            // Get the id from the route params
-            const { itemId } = route.params;
-
-            // Get the object from AsyncStorage by its id
-            const object = await getObjectById(itemId);
-
-            // Set the retrieved object to state
-            setCuentas(object.eventos);
-        } catch (error) {
-            console.log('Error fetching object:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchObject();
-    }, [route.params]);
+    let object = null;
 
     const getObjectById = async (id) => {
 
@@ -41,8 +24,6 @@ function MyScreen({ route }) {
             // Parse the JSON string into a JavaScript array
             const dataArray = JSON.parse(jsonValue);
 
-            console.log(dataArray);
-
             // Find the object with the matching id property
             const matchingObject = dataArray.find((object) => object.id === id);
 
@@ -53,6 +34,26 @@ function MyScreen({ route }) {
             return null;
         }
     };
+
+    const fetchObject = async () => {
+        try {
+            // Get the object from AsyncStorage by its id
+            object = await getObjectById(itemId);
+
+            // Set the retrieved object to state
+            setEventos(object.eventos);
+        } catch (error) {
+            console.log('Error fetching object:', error);
+        }
+    };
+
+    const handleAgregarEvento = (eventos) => {
+        onSaveEvento(itemId, eventos, setEventos);
+    }
+
+    useEffect(() => {
+        fetchObject();
+    }, [route.params]);
 
     const renderItem = ({ item }) => {
         return (
@@ -72,28 +73,17 @@ function MyScreen({ route }) {
         );
     };
 
-    const handleAgregarMovimiento = (item) => {
-        // let newCuenta = {
-        //     "nombre": item.nombre,
-        //     "fecha": item.fecha,
-        //     "cantidad": item.cantidad
-        // }
-
-        // setCuentas(...cuentas, newCuenta);
-        console.log('agregar movimiento')
-    }
-
     return (
         <View>
-            {cuentas ? (
+            {eventos ? (
                 <View>
                     <FlatList
-                        data={cuentas}
+                        data={eventos}
                         renderItem={renderItem}
                         ListEmptyComponent={renderEmptyState}
                     />
                     <TouchableOpacity
-                        onPress={handleAgregarMovimiento}
+                        onPress={() => navigation.navigate('Cuentas_Add_Evento', { onSave: handleAgregarEvento, itemId: itemId })}
                         style={styles.button}
                     >
                         <Text>Agregar movimiento</Text>
@@ -108,17 +98,17 @@ function MyScreen({ route }) {
 
 const styles = StyleSheet.create({
     button: {
-      backgroundColor: '#4CAF50',
-      padding: 10,
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: 10,
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
     },
     buttonText: {
-      color: 'white',
-      fontSize: 16,
+        color: 'white',
+        fontSize: 16,
     },
-  });
+});
 
-export default MyScreen;
+export default Cuentas_Eventos;

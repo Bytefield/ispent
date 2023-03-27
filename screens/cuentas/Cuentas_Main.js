@@ -24,14 +24,20 @@ const Cuentas_Main = ({ navigation }) => {
         onSaveItem(item, setItems);
     };
 
+    const handleDeleteCuenta = async () => {
+        // await AsyncStorage.clear();
+    }
+
     const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('Cuentas_Items', { itemId: item.id })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Cuentas_Eventos', { itemId: item.id })}>
             <View style={{ padding: 10 }}>
                 <Text style={{ fontWeight: 'bold' }}>{item.nombre}</Text>
                 <Text>ID: {item.id}</Text>
                 <Text>Fecha de inicio: {item.fechaInicio}</Text>
                 <Text>Fecha de fin: {item.fechaFin}</Text>
-                <Text>Cerrado: {item.cerrado.toString()}</Text>
+                <TouchableOpacity onPress={handleDeleteCuenta}>
+                    <Text>Borrar</Text>
+                </TouchableOpacity>
             </View>
         </TouchableOpacity>
     );
